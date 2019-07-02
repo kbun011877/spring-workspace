@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="bye" class="com.sample.di.demo6.Goodbye"></bean>
+	<bean id="morning" class="com.sample.di.demo6.Goodmorning"></bean>
+	
+	<!-- 
+		Setter Injection
+			setter 메소드를 정의하고, </property>태그를 사용해서 setter 메소드를 선택한 다음, 
+			조립될 bean을 지정한다.
+	 -->
+	<bean id="service" class="com.sample.di.demo6.MessageService">
+		<property name="morning" ref="morning" ></property>
+		<property name="bye" ref="bye" ></property>
+	</bean>
+	
+	<!-- 
+		Constructor Injection
+			생성자 메소드를 정의하고, <constructior-arg /> 태그를 사용해서 조립될 빈을 지정한다.
+	 -->
+	 
+	 <bean id="messageService2" class="com.sample.di.demo6.MessageService">
+	 <!--
+	 	index를 사용해서 주입하기 
+	 	<constructor-arg index="1" ref="bye"></constructor-arg>
+	 	<constructor-arg index="0" ref="morning"></constructor-arg>
+	  -->
+	  	<constructor-arg ref="morning"></constructor-arg>
+	  	<constructor-arg ref="bye"></constructor-arg>
+	 </bean>
+	
+</beans>
