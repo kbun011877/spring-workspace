@@ -28,6 +28,23 @@
 			user_id = #value#
 	</select>
 	
+	<select id="getUserByName" parameterClass="string" resultClass="User">
+		select
+			user_id as id,
+			user_name as name,
+			user_password as password, 
+			user_email as email,
+			user_phone as phone,
+			user_age as age,
+			user_birth as birth,
+			user_profile as profile,
+			user_create_date as createDate
+		from 
+			portal_users
+		where 
+			user_name = #value#
+	</select>
+	
 	
 	
 </sqlMap>

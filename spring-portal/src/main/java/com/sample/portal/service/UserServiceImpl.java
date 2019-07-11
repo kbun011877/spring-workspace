@@ -1,5 +1,7 @@
 package com.sample.portal.service;
 
+import java.util.List;
+
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,6 +42,11 @@ public class UserServiceImpl implements UserService{
 		
 		
 		return user;
+	}
+	
+	@Override
+	public List<User> getUserByName(String name) {
+		return userDao.getUserByName(name);
 	}
 	
 	

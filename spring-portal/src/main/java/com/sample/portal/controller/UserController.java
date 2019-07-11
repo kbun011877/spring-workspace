@@ -3,6 +3,7 @@ package com.sample.portal.controller;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.sample.portal.exception.AlreadyUsedIdException;
@@ -127,6 +129,13 @@ public class UserController {
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/home.do";
+	}
+	
+	@RequestMapping("/getUser.do")
+	@ResponseBody
+	public List<User> getUser(String name) {
+		 List<User> users = userService.getUserByName(name);
+		 return users;
 	}
 	
 	@InitBinder

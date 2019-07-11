@@ -2,6 +2,8 @@ package com.sample.portal.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sample.portal.service.FreeBoardService;
 import com.sample.portal.vo.FreeBoardComment;
+import com.sample.portal.vo.User;
 
 
 @Controller
@@ -36,14 +39,18 @@ public class FreeBoardController {
 	}
 	
 	@RequestMapping("/addcomment.do")
-	public @ResponseBody List<FreeBoardComment> addcomment(@RequestParam("writer") String writer, @RequestParam("contents") String contents,  @RequestParam("no") int boardNo) {
+	public @ResponseBody List<FreeBoardComment> addcomment(HttpSession session, @RequestParam("contents") String contents,  @RequestParam("no") int boardNo) {
+		
+		User user = (User) session.getAttribute("LOGIN_USER");
+		
 		FreeBoardComment comment = new FreeBoardComment();
-		comment.setWriter(writer);
+		comment.setWriter(user.getName());
 		comment.setContents(contents);
 		comment.setBoardNo(boardNo);
 		freeBoardService.addNewFreeBoardComment(comment);
 		
-		List<FreeBoardComment> comments = freeBoardService.getFreeBoardComments(boardNo);		
+		List<FreeBoardComment> comments = freeBoardService.getFreeBoardComments(boardNo);
+		
 		return comments;
 	}
 	

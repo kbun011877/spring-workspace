@@ -17,28 +17,33 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 	
 	@Override
 	public void addFreeBoard(FreeBoard freeBoard) {
-		template.insert("freeboard.addFreeBoard", freeBoard);
+		template.insert("freeBoard.addFreeBoard", freeBoard);
 	}
 	
 	@Override
 	public List<FreeBoard> getAllFreeBoard() {
-		return template.queryForList("freeboard.getAllFreeBoard");
+		return template.queryForList("freeBoard.getAllFreeBoard");
 	}
 	
 	@Override
 	public FreeBoard getFreeBoardByNo(int boardNo) {
-		return (FreeBoard) template.queryForObject("freeboard.getFreeBoardByNo", boardNo);
+		return (FreeBoard) template.queryForObject("freeBoard.getFreeBoardByNo", boardNo);
 	}
 	
 	
 	@Override
 	public void addComment(FreeBoardComment comment) {
-		template.insert("addComment", comment);
+		template.insert("freeBoard.addComment", comment);
 	}
 	
 	@Override
 	public List<FreeBoardComment> getCommentByBoardNo(int boardNo) {
-		return template.queryForList("getCommentByBoardNo", boardNo);
+		return template.queryForList("freeBoard.getCommentByBoardNo", boardNo);
 	}
+	
+	
+	
+	
+	
 	
 }

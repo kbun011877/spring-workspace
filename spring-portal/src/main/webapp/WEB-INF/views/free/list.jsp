@@ -13,41 +13,35 @@
 <body>
 <%@ include file="../common/nav.jsp" %>
 	<div class="container">
-		<div class="page-header">
-			<h1>자유게시판</h1>
+	<div class="page-headet">
+		<h1>자유 게시판</h1>
+	</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>번호</th>
+							<th>제목</th>
+							<th>작성자</th>
+							<th>등록일</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="board" items="${boards }">
+							<tr>
+								<td>${board.no }</td>
+								<td><a href="detail.do?no=${board.no }">${board.title }</a></td>
+								<td>${board.writer }</td>
+								<td><fmt:formatDate value="${board.createDate}" /></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
 		</div>
-		<div class="table-responsive">
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th>번호</th>
-						<th>제목</th>
-						<th>글쓴이</th>
-						<th>생성일</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>1</td>
-						<td>abc</td>
-						<td>xx</td>
-						<td>2019.07.05</td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td>def</td>
-						<td>xx</td>
-						<td>2019.07.05</td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td>gh</td>
-						<td>xx</td>
-						<td>2019.07.05</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+		
+		
 	</div>
 	
 </body>

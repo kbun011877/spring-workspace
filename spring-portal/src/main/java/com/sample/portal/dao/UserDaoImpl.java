@@ -1,5 +1,7 @@
 package com.sample.portal.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 import org.springframework.stereotype.Repository;
@@ -21,5 +23,10 @@ public class UserDaoImpl implements UserDao{
 	public User getUserById(String userid) {
 		return (User) template.queryForObject("user.getUserById", userid);
 	}
-		
+	
+	@Override
+	public List<User> getUserByName(String userName) {
+		return template.queryForList("user.getUserByName", userName);
+	}
+	
 }
