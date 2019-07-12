@@ -19,7 +19,7 @@
 	
 	<div class="row">
 		<div class="col-sm-12">
-			<form class="well" method="post" action="register.do">
+			<form class="well" method="post" action="login.do">
 				<div class="form-group">
 					<label>아이디</label>
 					<input type="text" class="form-control" name="id" />

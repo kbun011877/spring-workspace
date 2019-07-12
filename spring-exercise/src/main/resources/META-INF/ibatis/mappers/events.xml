@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+<sqlMap namespace="Event" >
+	
+	<select id="getRandomEvent" resultClass="Event">
+	select 
+		event_no as no,
+		event_title as title,
+		event_contents as contents,
+		event_active as active,
+		event_create_date as createDate
+	from
+		(select 
+			*
+		from
+			spring_events 
+		order by
+			dbms_random.random()) 
+	 where rownum &lt;= 3
+	</select>
+	 
+	 <select id="getAllEvent" resultClass="Event">
+	 	select
+	 		event_no as no,
+			event_title as title,
+			event_contents as contents,
+			event_active as active,
+			event_create_date as createDate
+		from
+			spring_events
+	 </select>
+	 
+</sqlMap>

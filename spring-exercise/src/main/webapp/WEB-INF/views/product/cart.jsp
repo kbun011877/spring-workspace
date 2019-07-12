@@ -26,7 +26,7 @@
   		<div class="col-sm-12">
   			<div class="panel panel-default">
   				<div class="panel-heading">
-  					홍길동님의 장바구니 목록입니다.
+  					${LOGIN_USER.name }님의 장바구니 목록입니다.
   				</div>
   				<div class="panel-body">
   					<table class="table">
@@ -40,33 +40,17 @@
   							</tr>
   						</thead>
   						<tbody>
-  							<tr>
-  								<td>
-  									<img src="resources/images/coffee.jpg" alt="Nature" style="width: 120px; height:100px">
-  								</td>
-  								<td>맥심 커피 믹스</td>
-  								<td>5,400원</td>
-  								<td>2019-02-10</td>
-  								<td><a href="" class="btn btn-danger btn-sm">삭제</a></td>
-  							</tr>
-  							<tr>
-  								<td>
-  									<img src="resources/images/coffee.jpg" alt="Nature" style="width: 120px; height:100px">
-  								</td>
-  								<td>맥심 커피 믹스</td>
-  								<td>5,400원</td>
-  								<td>2019-02-10</td>
-  								<td><a href="" class="btn btn-danger btn-sm">삭제</a></td>
-  							</tr>
-  							<tr>
-  								<td>
-  									<img src="resources/images/coffee.jpg" alt="Nature" style="width: 120px; height:100px">
-  								</td>
-  								<td>맥심 커피 믹스</td>
-  								<td>5,400원</td>
-  								<td>2019-02-10</td>
-  								<td><a href="" class="btn btn-danger btn-sm">삭제</a></td>
-  							</tr>
+	  						<c:forEach var="cart" items="${carts }">
+	  							<tr>
+	  								<td>
+	  									<img src="resources/images/${cart.product.imgName }" alt="Nature" style="width: 120px; height:100px">
+	  								</td>
+	  								<td>${cart.product.name }</td>
+	  								<td><fmt:formatNumber value="${cart.product.price }"></fmt:formatNumber> 원</td>
+	  								<td><fmt:formatDate value="${cart.createDate }"/></td>
+	  								<td><a href="/deleteCartProduct.do?no=${cart.no }" class="btn btn-danger btn-sm">삭제</a></td>
+	  							</tr>
+	  						</c:forEach>
   						</tbody>
   					</table>
   				</div>

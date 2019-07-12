@@ -18,4 +18,19 @@
 	
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 	
+	<bean id="loginCheckInterceptor" class="kr.co.hta.interceptor.LoginCheckInterceptor"></bean>
+	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/home.do"/>
+			<mvc:exclude-mapping path="/registerform.do"/>
+			<mvc:exclude-mapping path="/register.do"/>
+			<mvc:exclude-mapping path="/loginform.do"/>
+			<mvc:exclude-mapping path="/login.do"/>
+			<!-- <mvc:exclude-mapping path="/free/**"/> -->
+			<ref bean="loginCheckInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
 </beans>

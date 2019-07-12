@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+<sqlMap namespace="Cart" >
+	
+	<select id="getCartListBuUser" resultClass="Cart" parameterClass="string">
+	select
+		a.cart_no as no , a.product_no as "product.no", a.user_id as userId , a.cart_create_date as createDate ,
+		b.product_img_name as "product.imgName", b.product_name as "product.name" , b.product_price "product.price"
+	from 
+		spring_carts a , spring_products b 
+	where
+		a.product_no = b.product_no
+	and
+		a.user_id = #value#
+	order by
+		cart_create_date desc
+	</select>
+	
+	 <delete id="deleteCart" parameterClass="int">
+	 	delete from spring_carts
+		where cart_no = #value#
+	 </delete>
+	 
+</sqlMap>

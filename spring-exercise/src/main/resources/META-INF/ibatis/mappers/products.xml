@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+<sqlMap namespace="Product" >
+	
+	<select id="getProductBySold" resultClass="Product" parameterClass="string">
+	select 
+		product_no as no, 
+		product_name as name, 
+		category_id as categoryId, 
+		product_img_name as imgName, 
+		product_price as price, 
+		product_summary as summary, 
+		product_sold_out as soldOut, 
+		product_type as type, 
+		product_create_date as createDate
+	from
+		(select 
+			*
+		from 
+			spring_products
+ 		order by
+			dbms_random.random()) 
+	 where 
+	 	rownum &lt;= 4
+	 and 
+	 	product_type = #value#
+	</select>
+	 
+</sqlMap>
