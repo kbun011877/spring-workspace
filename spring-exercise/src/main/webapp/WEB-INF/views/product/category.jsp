@@ -11,6 +11,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body>
+<c:set var="current" value="category"/>
 <%@ include file="../common/nav.jsp" %>
 <div class="container">
 	<div class="page-header">
@@ -24,137 +25,39 @@
 					카테고리
 				</div>
 				<ul class="nav nav-pills nav-stacked">
-					<li class="active"><a href="#">신상품</a></li>
-					<li><a href="#">추천상품</a></li>
-					<li><a href="#">식료품</a></li>
-					<li><a href="#">생활용품</a></li>
-					<li><a href="#">생활용품</a></li>
-					<li><a href="#">생활용품</a></li>
+					<li class="${empty param.keyword or keyword eq 'NEW' ? 'active' : '' }"><a href="category.do?opt=type&keyword=NEW">신상품</a></li>
+					<li class="${param.keyword eq 'RECOMMEND' ? 'active' : '' }"><a href="category.do?opt=type&keyword=RECOMMEND">추천상품</a></li>
+					<c:forEach var="category" items="${categories }">
+						<li class="${param.keyword eq category.id ? 'active' : '' }"><a href="category.do?opt=category&keyword=${category.id }">${category.name }</a></li>
+					</c:forEach>
 				</ul>
 			</div>
 		</div>
 		<div class="col-sm-9">
 			<div class="row">
+			<c:forEach var="product" items="${products }">
 				<div class="col-md-4">
 					<div class="thumbnail">
 						<a href="detail.do"> 
-							<img src="resources/images/coffee.jpg" alt="Nature" style="width: 100%">
+							<img src="resources/images/${product.imgName }" style="width: 100%">
 						</a>
 						<div class="caption">
-							<h4>맥심 커피</h4>
-							<p>5,000원</p>
-							<div class="text-center"><a href="" class="btn btn-primary">담기</a></div>
+							<h4>${product.name }</h4>
+							<p><fmt:formatNumber value="${product.price }"/> 원</p>
+							<c:if test="${not empty LOGIN_USER}">
+								<c:choose>
+									<c:when test="${product.soldOut eq 'N' }">
+										<div class="text-center"><a href="addcart.do?no=${product.no }" class="btn btn-primary">담기</a></div>
+									</c:when>
+									<c:otherwise>
+										<div class="text-center"><a href="#" class="btn btn-primary disabled" >담기</a></div>
+									</c:otherwise>
+								</c:choose>
+							</c:if>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="detail.do"> 
-							<img src="resources/images/coffee.jpg" alt="Nature" style="width: 100%">
-						</a>
-						<div class="caption">
-							<h4>맥심 커피</h4>
-							<p>5,000원</p>
-							<div class="text-center"><a href="" class="btn btn-primary">담기</a></div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="detail.do"> 
-							<img src="resources/images/coffee.jpg" alt="Nature" style="width: 100%">
-						</a>
-						<div class="caption">
-							<h4>맥심 커피</h4>
-							<p>5,000원</p>
-							<div class="text-center"><a href="" class="btn btn-primary">담기</a></div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="detail.do"> 
-							<img src="resources/images/coffee.jpg" alt="Nature" style="width: 100%">
-						</a>
-						<div class="caption">
-							<h4>맥심 커피</h4>
-							<p>5,000원</p>
-							<div class="text-center"><a href="" class="btn btn-primary">담기</a></div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="detail.do"> 
-							<img src="resources/images/coffee.jpg" alt="Nature" style="width: 100%">
-						</a>
-						<div class="caption">
-							<h4>맥심 커피</h4>
-							<p>5,000원</p>
-							<div class="text-center"><a href="" class="btn btn-primary">담기</a></div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="detail.do"> 
-							<img src="resources/images/coffee.jpg" alt="Nature" style="width: 100%">
-						</a>
-						<div class="caption">
-							<h4>맥심 커피</h4>
-							<p>5,000원</p>
-							<div class="text-center"><a href="" class="btn btn-primary">담기</a></div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="detail.do"> 
-							<img src="resources/images/coffee.jpg" alt="Nature" style="width: 100%">
-						</a>
-						<div class="caption">
-							<h4>맥심 커피</h4>
-							<p>5,000원</p>
-							<div class="text-center"><a href="" class="btn btn-primary">담기</a></div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="detail.do"> 
-							<img src="resources/images/coffee.jpg" alt="Nature" style="width: 100%">
-						</a>
-						<div class="caption">
-							<h4>맥심 커피</h4>
-							<p>5,000원</p>
-							<div class="text-center"><a href="" class="btn btn-primary">담기</a></div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="detail.do"> 
-							<img src="resources/images/coffee.jpg" alt="Nature" style="width: 100%">
-						</a>
-						<div class="caption">
-							<h4>맥심 커피</h4>
-							<p>5,000원</p>
-							<div class="text-center"><a href="" class="btn btn-primary">담기</a></div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="detail.do"> 
-							<img src="resources/images/coffee.jpg" alt="Nature" style="width: 100%">
-						</a>
-						<div class="caption">
-							<h4>맥심 커피</h4>
-							<p>5,000원</p>
-							<div class="text-center"><a href="" class="btn btn-primary">담기</a></div>
-						</div>
-					</div>
-				</div>
+			</c:forEach>
 			</div>
 		</div>
 	</div>

@@ -6,6 +6,6 @@ import kr.co.hta.vo.Notice;
 
 public interface NoticeService {
 
-	List<Notice> noticeRandom();
-	List<Notice> getAllNotice();
+	List<Notice> getNewNotices();
+	List<Notice> getAllNotices();
 }

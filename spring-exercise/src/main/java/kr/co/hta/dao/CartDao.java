@@ -6,6 +6,7 @@ import kr.co.hta.vo.Cart;
 
 public interface CartDao {
 
-	List<Cart> getCartByUser(String userId);
-	void deleteCart(Integer no);
+	List<Cart> getCartsByUserId(String userId);
+	void addCart(Cart cart);
+	void deleteCart(int cartNo);
 }

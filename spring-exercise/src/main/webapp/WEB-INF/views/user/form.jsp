@@ -11,11 +11,19 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body>
+<c:set var="current" value="registerform"/>
 <%@ include file="../common/nav.jsp" %>
 <div class="container">
 	<div class="page-header">
 		<h1>회원가입</h1>
 	</div>
+	
+	<c:if test="${param.fail eq 'dup' }">
+		<div class="alert alert-danger">
+			<strong>회원가입 실패</strong>
+			이미 가입된 아이디입니다.
+		</div>
+	</c:if>
 	
 	<div class="row">
 		<div class="col-sm-12">

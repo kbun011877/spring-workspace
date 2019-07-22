@@ -2,30 +2,87 @@
 <!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
 	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
 	
-<sqlMap namespace="Product" >
-	
-	<select id="getProductBySold" resultClass="Product" parameterClass="string">
-	select 
-		product_no as no, 
-		product_name as name, 
-		category_id as categoryId, 
-		product_img_name as imgName, 
-		product_price as price, 
-		product_summary as summary, 
-		product_sold_out as soldOut, 
-		product_type as type, 
-		product_create_date as createDate
-	from
-		(select 
-			*
-		from 
-			spring_products
- 		order by
-			dbms_random.random()) 
-	 where 
-	 	rownum &lt;= 4
-	 and 
-	 	product_type = #value#
+<sqlMap namespace="product">
+
+	<select id="getNewProducts" resultClass="Product">
+		select 
+			product_no no,
+			product_name name,
+			category_id "category.id",
+			product_img_name imgName,
+			product_price price,
+			product_summary summary,
+			product_sold_out soldOut,
+			product_type type,
+			product_create_date createDate
+		from (select *
+			  from spring_products
+			  where product_sold_out = 'N'
+			  and product_type = 'NEW'
+			  order by product_no asc)
+		where
+			rownum &lt;= 4
 	</select>
-	 
+	
+	<select id="getRecommendProducts" resultClass="Product">
+		select 
+			product_no no,
+			product_name name,
+			category_id "category.id",
+			product_img_name imgName,
+			product_price price,
+			product_summary summary,
+			product_sold_out soldOut,
+			product_type type,
+			product_create_date createDate
+		from (select *
+			  from spring_products
+			  where product_sold_out = 'N'
+			  and product_type = 'RECOMMEND'
+			  order by product_no asc)
+		where
+			rownum &lt;= 4
+	</select>
+	
+	<select id="getProductsByCategory" parameterClass="map" resultClass="Product">
+		select 
+			product_no no,
+			product_name name,
+			category_id "category.id",
+			product_img_name imgName,
+			product_price price,
+			product_summary summary,
+			product_sold_out soldOut,
+			product_type type,
+			product_create_date createDate
+		from
+			spring_products
+		<dynamic>
+			<isEqual property="opt" compareValue="type">
+				where product_type = #keyword#
+			</isEqual>
+			<isEqual property="opt" compareValue="category">
+				where category_id = #keyword#
+			</isEqual>
+		</dynamic>
+	</select>
+	
+	<select id="getProductByNo" parameterClass="int" resultClass="Product">
+		select 
+			product_no no,
+			product_name name,
+			category_id "category.id",
+			product_img_name imgName,
+			product_price price,
+			product_summary summary,
+			product_sold_out soldOut,
+			product_type type,
+			product_create_date createDate
+		from
+			spring_products
+		where
+			product_no = #value#
+	</select>
+	
+	
 </sqlMap>

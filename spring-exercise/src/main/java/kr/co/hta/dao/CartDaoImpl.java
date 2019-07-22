@@ -9,18 +9,23 @@ import org.springframework.stereotype.Repository;
 import kr.co.hta.vo.Cart;
 
 @Repository
-public class CartDaoImpl implements CartDao{
+public class CartDaoImpl implements CartDao {
 
 	@Autowired
 	private SqlMapClientTemplate template;
 	
 	@Override
-	public List<Cart> getCartByUser(String userId) {
-		return template.queryForList("Cart.getCartListBuUser", userId);
+	public void addCart(Cart cart) {
+		template.insert("cart.addCart", cart);
 	}
 	
 	@Override
-	public void deleteCart(Integer no) {
-		template.delete("Cart.deleteCart", no);
+	public List<Cart> getCartsByUserId(String userId) {
+		return template.queryForList("cart.getCartsByUserId", userId);
+	}
+	
+	@Override
+	public void deleteCart(int cartNo) {
+		template.delete("cart.deleteCart", cartNo);
 	}
 }

@@ -9,19 +9,17 @@ import kr.co.hta.dao.NoticeDao;
 import kr.co.hta.vo.Notice;
 
 @Service
-public class NoticeServiceImpl implements NoticeService{
+public class NoticeServiceImpl implements NoticeService {
 
 	@Autowired
 	private NoticeDao noticeDao;
 	
-	@Override
-	public List<Notice> noticeRandom() {
-		return noticeDao.getRandomNotice();
+	public List<Notice> getNewNotices() {
+		return noticeDao.getNewNotices();
 	}
 	
 	@Override
-	public List<Notice> getAllNotice() {
-		return noticeDao.getAllNotice();
+	public List<Notice> getAllNotices() {
+		return noticeDao.getAllNotices();
 	}
-	
 }

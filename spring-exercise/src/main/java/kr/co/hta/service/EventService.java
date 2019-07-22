@@ -6,6 +6,6 @@ import kr.co.hta.vo.Event;
 
 public interface EventService {
 
-	List<Event> eventRandom();
-	List<Event> allEvent();
+	List<Event> getNewEvents();
+	List<Event> getAllEvents();
 }

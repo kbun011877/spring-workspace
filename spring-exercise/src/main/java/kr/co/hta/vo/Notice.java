@@ -2,15 +2,12 @@ package kr.co.hta.vo;
 
 import java.util.Date;
 
-import lombok.Data;
-
 public class Notice {
 
 	private Integer no;
 	private String title;
 	private String contents;
 	private Date createDate;
-	
 	public Integer getNo() {
 		return no;
 	}
@@ -35,6 +32,5 @@ public class Notice {
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
-	
 	
 }

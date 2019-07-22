@@ -2,16 +2,14 @@ package kr.co.hta.vo;
 
 import java.util.Date;
 
-import lombok.Data;
-
 public class User {
 
 	private String id;
-	private String password;
 	private String name;
+	private String password;
 	private String email;
 	private String active;
-	private Date craeteDate;
+	private Date createDate;
 	
 	public String getId() {
 		return id;
@@ -19,17 +17,17 @@ public class User {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public String getEmail() {
 		return email;
@@ -43,13 +41,12 @@ public class User {
 	public void setActive(String active) {
 		this.active = active;
 	}
-	public Date getCraeteDate() {
-		return craeteDate;
+	public Date getCreateDate() {
+		return createDate;
 	}
-	public void setCraeteDate(Date craeteDate) {
-		this.craeteDate = craeteDate;
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
-	
 	
 	
 }

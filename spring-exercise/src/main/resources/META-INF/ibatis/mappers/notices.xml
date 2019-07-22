@@ -2,32 +2,30 @@
 <!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
 	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
 	
-<sqlMap namespace="Notice" >
-	
-	<select id="getRandomNotice" resultClass="Notice">
-	select 
-		notice_no as no,
-		notice_title as title,
-		notice_contents as contents,
-		notice_create_date as createDate
-	from
-		(select 
-			*
-		from
-			spring_notices
-		order by
-			dbms_random.random()) 
-	 where rownum &lt;= 3
+<sqlMap namespace="notice">
+
+	<select id="getNewNotices" resultClass="Notice">
+		select 
+			notice_no no,
+			notice_title title,
+			notice_contents contents,
+			notice_create_date createDate
+		from (select *
+			  from spring_notices
+			  order by notice_no desc)
+		where
+			rownum &lt;= 3
 	</select>
-	 
-	 <select id="getAllNotice" resultClass="Notice">
-	 	select 
-			notice_no as no,
-			notice_title as title,
-			notice_contents as contents,
-			notice_create_date as createDate
-		from
+	
+	<select id="getAllNotices" resultClass="Notice">
+		select 
+			notice_no no,
+			notice_title title,
+			notice_contents contents,
+			notice_create_date createDate
+		from 
 			spring_notices
-	 </select>
-	 
+		order by	
+			notice_no desc
+	</select>
 </sqlMap>

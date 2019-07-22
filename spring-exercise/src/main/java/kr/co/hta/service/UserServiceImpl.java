@@ -1,38 +1,36 @@
 package kr.co.hta.service;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.hta.dao.UserDao;
-import kr.co.hta.exception.AlreadyUsedIdException;
 import kr.co.hta.vo.User;
-
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserDao userDao;
 	
 	@Override
-	public User login(String id) {
+	public boolean register(User user) {
+		if (userDao.getUserById(user.getId()) != null) {
+			return false;
+		}
+		user.setPassword(DigestUtils.md5Hex(user.getPassword()));
+		userDao.addUser(user);
+		return true;
+	}
+	
+	@Override
+	public User login(String id, String password) {
 		User user = userDao.getUserById(id);
+		if (user == null) {
+			return null;
+		}
+		if (!user.getPassword().equals(DigestUtils.md5Hex(password))) {
+			return null;
+		}
 		return user;
 	}
-	
-	@Override
-	public void registerUser(User user) {
-		User user1 = userDao.getUserById(user.getId());
-		if(user1 != null) {
-			throw new AlreadyUsedIdException("["+user1.getId()+"]는 이미 존재하는 아이디 입니다.");
-		}
-		
-		userDao.addUser(user);			
-		
-	}
-	
-	@Override
-	public User getUser(String id) {
-		return userDao.getUserById(id);
-	}
-	
 }

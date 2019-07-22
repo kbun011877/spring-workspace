@@ -4,7 +4,6 @@ import kr.co.hta.vo.User;
 
 public interface UserDao {
 
-	User getUserById(String userId);
 	void addUser(User user);
-	
+	User getUserById(String userId);
 }

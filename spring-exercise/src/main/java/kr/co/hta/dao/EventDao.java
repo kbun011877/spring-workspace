@@ -6,7 +6,6 @@ import kr.co.hta.vo.Event;
 
 public interface EventDao {
 
-	List<Event> getRandomEvent();
-	List<Event> getAllEvent();
-	
+	List<Event> getNewEvents();
+	List<Event> getAllEvents();
 }

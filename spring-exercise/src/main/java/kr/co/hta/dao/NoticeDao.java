@@ -6,6 +6,6 @@ import kr.co.hta.vo.Notice;
 
 public interface NoticeDao {
 
-	List<Notice> getRandomNotice();
-	List<Notice> getAllNotice();
+	List<Notice> getNewNotices();
+	List<Notice> getAllNotices();
 }

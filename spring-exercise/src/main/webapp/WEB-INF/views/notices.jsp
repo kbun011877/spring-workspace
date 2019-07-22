@@ -11,6 +11,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body>
+<c:set var="current" value="notice"/>
 <%@ include file="common/nav.jsp" %>
 <div class="container">
 	<div class="page-header">
@@ -33,21 +34,17 @@
 				</thead>
 				<tbody>
 				<c:forEach var="notice" items="${notices }">
-				
 					<tr>
 						<td>${notice.no }</td>
 						<td>${notice.title }</td>
-						<td><fmt:formatDate value="${notice.createDate }"/> </td>
+						<td><fmt:formatDate value="${notice.createDate }"/></td>
 					</tr>
 					<tr>
 						<td></td>
-						<td>
-						${notice.contents }
-						</td>
+						<td>${notice.contents }</td>
 						<td></td>
 					</tr>
 				</c:forEach>
-					
 				</tbody>
 			</table>
 		</div>
@@ -57,14 +54,20 @@
 	$(function() {
 		$("#notice-table tbody tr:odd").hide();
 		
-		// 제목행을 클릭하면 그 아래의 내용행이 표시되도록 합니다.
-		// 제목행을 다시 클릭하면  내용행이 사라집니다.
+		$("#notice-table tbody tr").click(function() {
+			if ($(this).prev().hasClass('active')) {
+				return false;
+			}
+			
+			if ($(this).hasClass('active')) {
+				$(this).removeClass('active')
+				       .next().hide();
+			} else {
+				$(this).addClass('active')
+					   .next().show();
+			}
+		});
 	})
-	
-	$("#notice-table tbody tr:even").click(function(event) {
-		$(this).next().toggle();
-	})
-	
 </script>
 </body>
 </html>

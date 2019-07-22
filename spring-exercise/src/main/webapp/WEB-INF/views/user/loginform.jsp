@@ -11,11 +11,25 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body>
+<c:set var="current" value="loginform"/>
 <%@ include file="../common/nav.jsp" %>
 <div class="container">
 	<div class="page-header">
 		<h1>회원가입</h1>
 	</div>
+	
+	<c:if test="${param.fail eq 'invalid' }">
+		<div class="alert alert-danger">
+			<strong>로그인 실패</strong>
+			아이디 혹은 비밀번호가 올바르지 않습니다.
+		</div>
+	</c:if>
+	<c:if test="${param.fail eq 'deny' }">
+		<div class="alert alert-danger">
+			<strong>로그인 필요</strong>
+			요청한 서비스는 로그인 후 사용가능한 서비스 입니다.
+		</div>
+	</c:if>
 	
 	<div class="row">
 		<div class="col-sm-12">

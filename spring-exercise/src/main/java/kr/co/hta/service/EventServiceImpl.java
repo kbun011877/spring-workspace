@@ -9,18 +9,18 @@ import kr.co.hta.dao.EventDao;
 import kr.co.hta.vo.Event;
 
 @Service
-public class EventServiceEmpl implements EventService{
+public class EventServiceImpl implements EventService {
 
 	@Autowired
 	private EventDao eventDao;
 	
 	@Override
-	public List<Event> eventRandom() {
-		return eventDao.getRandomEvent();
+	public List<Event> getNewEvents() {
+		return eventDao.getNewEvents();
 	}
 	
 	@Override
-	public List<Event> allEvent() {
-		return eventDao.getAllEvent();
+	public List<Event> getAllEvents() {
+		return eventDao.getAllEvents();
 	}
 }
